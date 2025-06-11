@@ -1,0 +1,114 @@
+/* Reset dasar */
+body, h1, h2, h3, p, a, button {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+body {
+    background: #f3f7f0;
+    color: #333;
+    text-align: center;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2b6e42;
+    padding: 15px 50px;
+    color: white;
+}
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+    background: url('../images/background.jpg') center/cover no-repeat;
+    padding: 100px 20px;
+    color: white;
+}
+.hero h1 {
+    font-size: 48px;
+    font-family: 'Cursive', sans-serif;
+}
+.promo {
+    background: #536dff;
+    color: white;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 15px;
+    border-radius: 5px;
+}
+.btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #7b6dfa;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Produk Display */
+.products {
+    padding: 50px 0;
+}
+.products h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+.product-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.product {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.product img {
+    width: 100%;
+    border-radius: 10px;
+}
+.price {
+    color: #1f1f1f;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.btn-buy {
+    padding: 8px 15px;
+    background: #2b6e42;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.btn-buy:hover {
+    background: #6c5cf5;
+}
+
+/* Footer */
+footer {
+    background: #2b6e42;
+    color: white;
+    padding: 20px 0;
+    margin-top: 50px;
+}
+.social-media a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+}

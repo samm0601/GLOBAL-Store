@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Care Healthy Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: black;
+            padding: 20px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        .search-bar {
+            margin: 20px;
+        }
+        .search-bar input {
+            padding: 10px;
+            width: 200px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: black;
+        }
+        .hero-text h1 {
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .start-button {
+            background-color: #FFD700;
+            color: black;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        .start-button:hover {
+            background-color: #FFC107;
+        }
+        .container {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .product {
+            background: white;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 220px;
+            text-align: center;
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .cart {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            display: none;
+        }
+        .cart button {
+            width: 100%;
+        }
+        .popup, .paymentPopup, .orderStatus {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+        let cart = [];
+
+        function startShopping() {
+            document.querySelector(".hero-section").style.display = "none";
+            document.querySelector(".container").style.display = "flex";
+            document.querySelector(".cart").style.display = "block";
+        }
+
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            updateCart();
+        }
+
+        function updateCart() {
+            let cartDiv = document.getElementById("cart");
+            cartDiv.innerHTML = "<h3>Keranjang Belanja</h3>";
+            cart.forEach(item => {
+                cartDiv.innerHTML += `<p>${item.product} - Rp${item.price}</p>`;
+            });
+            cartDiv.innerHTML += '<button onclick="showPaymentPopup()">Checkout</button>';
+        }
+
+        function showPaymentPopup() {
+            document.querySelector(".paymentPopup").style.display = "block";
+        }
+
+        function closePaymentPopup() {
+            document.querySelector(".paymentPopup").style.display = "none";
+        }
+
+        function processOrder(method) {
+            closePaymentPopup();
+            document.querySelector(".orderStatus").style.display = "block";
+            document.querySelector(".orderStatus").innerHTML = `<h2>Pembayaran Berhasil</h2><p>Pesanan Anda sedang diproses dengan metode: ${method}</p><button onclick="closeOrderStatus()">Tutup</button>`;
+            cart = [];
+            updateCart();
+        }
+
+        function closeOrderStatus() {
+            document.querySelector(".orderStatus").style.display = "none";
+        }
+
+        function searchProduct() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let products = document.querySelectorAll(".product");
+            products.forEach(product => {
+                let name = product.querySelector("h2").innerText.toLowerCase();
+                product.style.display = name.includes(input) ? "block" : "none";
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="header">Global Care Healthy Store</div>
+    <div class="search-bar">
+        <input type="text" id="searchInput" onkeyup="searchProduct()" placeholder="Cari produk...">
+    </div>
+    <div class="hero-section">
+        <div class="hero-text">
+            <h1>Pilih Semua yang Anda Suka</h1>
+            <button class="start-button" onclick="startShopping()">Mulai Berbelanja</button>
+        </div>
+    </div>
+    <div class="cart" id="cart"><h3>🛒</h3></div>
+    <div class="container">
+        <div class="product">
+            <img src="produk 1 sabun shinzui.jpg" alt="Produk 1">
+            <h2>Sabun Shinzui</h2>
+            <p>Harga: Rp50.000</p>
+            <button onclick="addToCart('Sabun Shinzui', 50000)">Beli Sekarang</button>
+        </div>
+    </div>
+    <div class="paymentPopup">
+        <h2>Pilih Metode Pembayaran</h2>
+        <button onclick="processOrder('e-Wallet')">e-Wallet</button>
+        <button onclick="processOrder('Transfer Bank')">Transfer Bank</button>
+        <button onclick="closePaymentPopup()">Tutup</button>
+    </div>
+    <div class="orderStatus"></div>
+</body>
+      </html>
